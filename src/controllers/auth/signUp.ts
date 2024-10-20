@@ -39,7 +39,7 @@ export const signUp = async (
      throw new CustomError("Error Sending email", 500)
     });
 
-    res.status(201).json({success: false, message: "User registered"})
+    res.status(201).json({success: true, message: "User registered"})
   } catch (err) {
     if (err instanceof Error) {
       next(err);
