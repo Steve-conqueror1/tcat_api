@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  app:
+    image: tcat_db:latest
+    container_name: tcat_app
+    build: .
+    ports:
+      - "${PORT}:${DOCKER_PORT}"
+    env_file:
+      - .env
+    restart: always
+    environment:
+      - DATABASE_URL
+      - PORT

@@ -1,0 +1,2 @@
+-------------------- Email Confirmation ----------------------------------------
+https://www.educative.io/courses/building-full-stack-web-applications-with-node-js-and-react/email-confirmation
