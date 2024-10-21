@@ -1,2 +1,10 @@
 -------------------- Email Confirmation ----------------------------------------
 https://www.educative.io/courses/building-full-stack-web-applications-with-node-js-and-react/email-confirmation
+
+
+------------------------CI/CD--------------------------------
+---------------------------https://www.educative.io/courses/simple-building-modern-applications-docker/github-actions----------------
+
+
+-----JWT-----
+https://www.youtube.com/watch?v=j7K8WR7TPQ8&ab_channel=ThabishKader

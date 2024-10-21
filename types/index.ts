@@ -1,7 +1,8 @@
+type Role = "BASIC" | "ADMIN" | "SUPER_ADMIN"
 export type UserType = {
   email: string;
   password: string;
-  role: "BASIC" | "ADMIN" | "SUPER_ADMIN";
+  role: Role;
 };
 
 export type Auth = Pick<UserType, "email" | "password">;
@@ -22,3 +23,13 @@ export class CustomError extends Error {
     this.statusCode = statusCode;
   }
 }
+
+
+export type AccessTokenPayload = {
+  userId: string;
+  email: string;
+  role:Role;
+}
+
+
+export type RefreshTokenPayload = Pick<AccessTokenPayload, "userId" | "email">

@@ -4,7 +4,6 @@ import { CustomError } from "../../../types";
 
 export const emailVerification = async (confirmationToken: string) => {
   try {
-
     if(!confirmationToken){
       throw new CustomError("Invalid verification", 409)
     }

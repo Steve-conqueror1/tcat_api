@@ -3,6 +3,6 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/api/confirmation/:confirmationToken", verifyEmail);
+router.get("/confirmation/:confirmationToken", verifyEmail);
 
 export default router;

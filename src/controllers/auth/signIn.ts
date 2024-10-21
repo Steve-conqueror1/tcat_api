@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { authSchema } from "./../../schemas";
+import { authSchema } from "../../schemas";
 import { CustomError } from "../../../types";
-import { login } from "./../../services/auth/login";
+import { login } from "../../services/auth";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 
 export const signIn = async (
   req: Request,
@@ -19,7 +20,20 @@ export const signIn = async (
     }
 
     const result = await login(body);
-    res.status(200).json(result);
+    const {id, refreshToken} = result;
+
+    res.cookie(ACCESS_TOKEN, refreshToken, {
+      httpOnly: true,
+      secure: true,
+      path: "/",
+    })
+
+    res.cookie(REFRESH_TOKEN, refreshToken, {
+      httpOnly: true,
+      secure: true,
+      path: "/",
+    })
+    res.status(200).json({success: true, message: "Login Successful", id});
   } catch (error) {
     next(error);
   }

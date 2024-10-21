@@ -15,3 +15,7 @@ export const errorHandler: ErrorRequestHandler = (
     ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
   });
 };
+
+export const notFountHandler = async (req:Request, res: Response, next: NextFunction) => {
+ res.status(404).json({success: false, message: "The requested api endpoint does not exist"})
+}
