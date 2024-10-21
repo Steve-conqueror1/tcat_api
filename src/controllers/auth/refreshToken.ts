@@ -1,31 +1,28 @@
 import {Request, Response, NextFunction, json} from "express";
-import {CustomError, RefreshTokenPayload} from "../../../types";
-import jwt, {JsonWebTokenError, VerifyErrors} from "jsonwebtoken"
-import process from "node:process";
+import {CustomError } from "../../../types";
+import jwt from "jsonwebtoken"
+
+import { ACCESS_TOKEN, JWT_SECRET } from "../../constants";
 
 export const refreshToken = async (req:Request, res:Response, next: NextFunction) => {
     try {
       const refreshToken = req.cookies.refreshToken;
-      console.log("------refresh token-----", refreshToken);
-      const ACCESS_TOKEN_SECRET_KEY = process.env.ACCESS_TOKEN_SECRET_KEY || "";
-      const REFRESH_TOKEN_SECRET_KEY =process.env.REFRESH_TOKEN_SECRET_KEY || "";
-
       if(!refreshToken){
           throw new CustomError("You are not logged in", 401)
       }
 
-      jwt.verify(refreshToken, REFRESH_TOKEN_SECRET_KEY, (err: any, payload: any) => {
+      jwt.verify(refreshToken, JWT_SECRET, (err: any, payload: any) => {
           if(err){
               throw new CustomError("Forbidden, token verification failed", 403);
           }
-         const newAccessToken = jwt.sign({userId: payload.id, email: payload.email, role:payload.role}, ACCESS_TOKEN_SECRET_KEY, {expiresIn: "15m"})
-          res.status(200).json({accessToken: newAccessToken})
+         const newAccessToken = jwt.sign({userId: payload.id, email: payload.email, role:payload.role}, JWT_SECRET, {expiresIn: "15m"})
+             res.cookie(ACCESS_TOKEN, newAccessToken, {
+              httpOnly: true,
+              secure: true,
+              path: "/",
+            })
+          res.status(200).json({success: true, message: "A new Access token created"})
       });
-
-
-
-
-
     }catch (err) {
       next(err)
     }

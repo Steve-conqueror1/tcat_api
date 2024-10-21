@@ -20,9 +20,9 @@ export const signIn = async (
     }
 
     const result = await login(body);
-    const {id, refreshToken} = result;
+    const {id, accessToken, refreshToken} = result;
 
-    res.cookie(ACCESS_TOKEN, refreshToken, {
+    res.cookie(ACCESS_TOKEN, accessToken, {
       httpOnly: true,
       secure: true,
       path: "/",
