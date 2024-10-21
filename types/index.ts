@@ -30,6 +30,3 @@ export type AccessTokenPayload = {
   email: string;
   role:Role;
 }
-
-
-export type RefreshTokenPayload = Pick<AccessTokenPayload, "userId" | "email">

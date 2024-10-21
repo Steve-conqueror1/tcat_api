@@ -7,4 +7,5 @@ https://www.educative.io/courses/building-full-stack-web-applications-with-node-
 
 
 -----JWT-----
+Check axios interceptors
 https://www.youtube.com/watch?v=j7K8WR7TPQ8&ab_channel=ThabishKader
